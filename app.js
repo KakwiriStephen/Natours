@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
 
 const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
@@ -24,7 +25,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set security http headers
-app.use(helmet());
+app.use(
+    helmet({
+        crossOriginEmbedderPolicy: false,
+        crossOriginResourcePolicy: {
+            allowOrigins: ['*'],
+        },
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ['*'],
+                scriptSrc: ["* data: 'unsafe-eval' 'unsafe-inline' blob:"],
+            },
+        },
+    })
+);
 
 // development logging
 if (process.env.NODE_ENV === 'development') {
@@ -41,6 +55,7 @@ app.use('/api', limiter);
 
 //Body parser, readin data from the body into rq.body
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 //data sanitazisation against NOSQL querry injection
 app.use(mongoSanitize());

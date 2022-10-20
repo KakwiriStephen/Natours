@@ -7,7 +7,7 @@ html
             link(rel='stylesheet' href='/css/style.css')
             link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
             link(href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
-            title Natours | #{title}
+            title Natours | #{title} 
     body 
     //HEADER
     include _header
@@ -18,6 +18,9 @@ html
 
     //FOOTER
     include _footer 
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js')
-    script(src='/js/mapbox.js')  
-    script(src='/js/login.js')
+    
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js')
+    //- script(src='/js/mapbox.js')  
+    //- script(src='/js/login.js')
+
+    script(src='/js/bundle.js')

@@ -36,7 +36,6 @@ app.listen(port, () => {
 });
 
 //unhandled rejected promises
-
 process.on('unhandledRejection', (err) => {
     console.log('UNHANDLED REJECTION ☀ shutting down...');
     Server.close(() => {

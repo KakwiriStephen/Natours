@@ -1,5 +1,7 @@
 const Tour = require('../models/tourModels');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
+const User = require('../models/userModels');
 
 exports.getOverview = catchAsync(async(req, res) => {
     //get tour data from collection
@@ -21,6 +23,10 @@ exports.getTour = catchAsync(async(req, res, next) => {
         path: 'reviews',
         fields: 'review rating user',
     });
+
+    if (!tour) {
+        return next(new AppError('There is no tour with this name', 404));
+    }
     //Bulid template
 
     //Render template
@@ -42,3 +48,24 @@ exports.getSignupForm = (req, res) => {
         title: 'signup to create account',
     });
 };
+
+exports.getAccount = (req, res) => {
+    res.status(200).render('account', {
+        title: 'Your account',
+    });
+};
+
+exports.updateUserData = catchAsync(async(req, res, next) => {
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user.id,
+
+        {
+            name: req.body.name,
+            email: req.body.email,
+        }
+    );
+    res.status(200).render('account', {
+        title: 'Your account',
+        user: updatedUser,
+    });
+});

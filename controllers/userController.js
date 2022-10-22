@@ -1,39 +1,36 @@
-const AppError = require('../utils/appError')
-const User = require('./../models/userModels')
-const catchAsync = require('./../utils/catchAsync')
-const factory = require('./handlerFactory')
-
+const AppError = require('../utils/appError');
+const User = require('./../models/userModels');
+const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
-    Object.keys(obj).forEach(el => {
-        if (allowedFields.includes(el)) newObj(el) = obj(el)
-    })
+    Object.keys(obj).forEach((el) => {
+        if (allowedFields.includes(el)) newObj[el] = obj[el];
+    });
     return newObj;
-}
-
-
+};
 
 exports.updateMe = catchAsync(async(req, res, next) => {
     //create an error if user updates password
     if (req.body.password || req.body.passwordconfirm) {
-        return next(new AppError('This route is not for pasword updates', 400))
+        return next(new AppError('This route is not for pasword updates', 400));
     }
 
-    const filteredBody = filterObj(req.body, 'name', 'email')
+    const filteredBody = filterObj(req.body, 'name', 'email');
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
         new: true,
-        runValidators: true
-    })
+        runValidators: true,
+    });
 
     //update user document
 
     res.status(200).json({
         status: 'success',
         data: {
-            user: updatedUser
-        }
-    })
+            user: updatedUser,
+        },
+    });
 });
 
 exports.deleteMe = catchAsync(async(req, res, next) => {
@@ -41,24 +38,23 @@ exports.deleteMe = catchAsync(async(req, res, next) => {
 
     res.status(204).json({
         status: 'success',
-        data: null
-    })
-
-})
+        data: null,
+    });
+});
 
 exports.getMe = (req, res, next) => {
-    req.params.id = req.params.user
-    next()
-}
+    req.params.id = req.params.user;
+    next();
+};
 
 exports.createUser = (req, res) => {
     res.status(500).json({
         Status: 'Error',
-        Message: 'This route is note defined Please use the signUp page'
-    })
-}
+        Message: 'This route is note defined Please use the signUp page',
+    });
+};
 
-exports.getUser = factory.getOne(User)
-exports.getAllUsers = factory.getAll(User)
-exports.updateUser = factory.updateOne(User)
-exports.deleteUser = factory.deleteOne(User)
+exports.getUser = factory.getOne(User);
+exports.getAllUsers = factory.getAll(User);
+exports.updateUser = factory.updateOne(User);
+exports.deleteUser = factory.deleteOne(User);

@@ -16,25 +16,31 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 
 router.use(authController.protect);
 router.patch(
-  '/updateMyPassword',
+    '/updateMyPassword',
 
-  authController.updatePassword
+    authController.updatePassword
 );
 router.get('/me', userController.getMe, userController.getUser);
-router.patch('/updateMe', authController.protect, userController.updateMe);
+router.patch(
+    '/updateMe',
+    userController.uploadUserPhoto,
+    userController.resizeUserPhoto,
+    authController.protect,
+    userController.updateMe
+);
 router.delete('/deleteMe', authController.protect, userController.deleteMe);
 
 router.use(authController.restrictTo('admin'));
 
 router
-  .route('/')
-  .get(userController.getAllUsers)
-  .post(userController.createUser);
+    .route('/')
+    .get(userController.getAllUsers)
+    .post(userController.createUser);
 
 router
-  .route('/:id')
-  .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+    .route('/:id')
+    .get(userController.getUser)
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
 
 module.exports = router;

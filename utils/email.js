@@ -1,11 +1,12 @@
 const nodemailer = require('nodemailer');
 const pug = require('pug');
 const htmlToText = require('html-to-text');
+const { google } = require('googleapis');
 
 module.exports = class Email {
     constructor(user, url) {
         this.to = user.email;
-        this.firstName = user.name.split('')[0];
+        this.firstName = user.name.split(' ')[0];
         this.url = url;
         this.from = `Kakwiri Stephen <${process.env.EMAIL_FROM}>`;
     }
@@ -13,7 +14,13 @@ module.exports = class Email {
     newTransport() {
         if (process.env.NODE_ENV === 'production') {
             //sendgrid
-            return 1;
+            return nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.GMAIL_USERNAME,
+                    pass: process.env.GMAIL_PASS,
+                },
+            });
         }
         return nodemailer.createTransport({
             host: process.env.EMAIL_HOST,

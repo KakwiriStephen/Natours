@@ -1,8 +1,8 @@
 import '@babel/polyfill';
-import { bookTour } from './stripe';
 import { displayMap } from './mapBox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
+import { bookTour } from './stripe';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');

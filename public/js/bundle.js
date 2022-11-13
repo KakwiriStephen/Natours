@@ -12397,6 +12397,7 @@ if (signUpForm) signUpForm.addEventListener('submit', function (e) {
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
   var confirmpassword = document.getElementById('confirmpassword').value;
+  (0, _signup.signup)(name, email, password, confirmpassword);
 });
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {

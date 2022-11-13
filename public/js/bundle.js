@@ -12373,7 +12373,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //DOM ELEMENTS
 var mapBox = document.getElementById('map');
 var loginForm = document.querySelector('.form--login');
-var signUpForm = document.querySelector('form--signup');
+var signUpForm = document.querySelector('.form--signup');
 var logOutBtn = document.querySelector('.nav__el--logout');
 var userDataForm = document.querySelector('.form-user-data');
 var userPasswordForm = document.querySelector('.form-user-password');

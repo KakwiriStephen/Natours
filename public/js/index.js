@@ -1,5 +1,6 @@
 import '@babel/polyfill';
 import { displayMap } from './mapBox';
+import { signup } from './signup';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';

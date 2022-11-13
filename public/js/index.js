@@ -35,8 +35,8 @@ if (signUpForm)
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const confirmpassword = document.getElementById('confirmpassword').value;
-        signup(name, email, password, confirmpassword);
+        const passwordconfirm = document.getElementById('passwordconfirm').value;
+        signup(name, email, password, passwordconfirm);
     });
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);

@@ -11984,7 +11984,7 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var signup = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, email, password, confirmpassword) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(name, email, password, passwordconfirm) {
     var res;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
@@ -11999,7 +11999,7 @@ var signup = /*#__PURE__*/function () {
                 name: name,
                 email: email,
                 password: password,
-                confirmpassword: confirmpassword
+                passwordconfirm: passwordconfirm
               }
             });
           case 3:
@@ -12396,8 +12396,8 @@ if (signUpForm) signUpForm.addEventListener('submit', function (e) {
   var name = document.getElementById('name').value;
   var email = document.getElementById('email').value;
   var password = document.getElementById('password').value;
-  var confirmpassword = document.getElementById('confirmpassword').value;
-  (0, _signup.signup)(name, email, password, confirmpassword);
+  var passwordconfirm = document.getElementById('passwordconfirm').value;
+  (0, _signup.signup)(name, email, password, passwordconfirm);
 });
 if (logOutBtn) logOutBtn.addEventListener('click', _login.logout);
 if (userDataForm) userDataForm.addEventListener('submit', function (e) {
